@@ -5,8 +5,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: var(--nav-height);
-  padding: 0 var(--nav-padding-x);
+  min-height: var(--nav-height);
+  padding: var(--nav-padding-y) var(--nav-padding-x);
   background-color: var(--nav-bg);
   border-bottom: 1px solid var(--nav-border);
 }
