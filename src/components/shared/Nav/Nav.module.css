@@ -43,7 +43,7 @@
 
 .navLink:hover {
   color: var(--nav-link-hover-color);
-  text-decoration: underline;
+  text-decoration: none;
 }
 
 .navRight {
