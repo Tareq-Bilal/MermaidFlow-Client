@@ -2,6 +2,18 @@
 
 A modern, responsive landing page for Mermaid Flow built with Next.js and a custom design system.
 
+## About
+
+Mermaid Flow is a visual diagram tool that simplifies technical documentation. Create beautiful flowcharts, sequence diagrams, class diagrams, and more using a simple text-based syntax. 
+
+### Features
+
+- **Visual Diagrams** - Create flowcharts, sequence diagrams, ER diagrams, and more
+- **Text-Based** - Define diagrams using simple Markdown-like syntax
+- **Real-time Rendering** - See your diagrams render instantly as you type
+- **Export Options** - Download diagrams in PNG, SVG, or PDF formats
+- **Collaboration** - Share and collaborate with your team
+
 ## Tech Stack
 
 - **Framework**: Next.js 14
