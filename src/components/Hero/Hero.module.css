@@ -5,7 +5,7 @@
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: var(--spacing-120) var(--spacing-24);
+  padding: var(--spacing-160) var(--spacing-32);
   min-height: calc(100vh - var(--nav-height));
   overflow: hidden;
 }
@@ -99,25 +99,21 @@
   }
 }
 
-/* Desktop (1024px - 1279px) */
-@media (max-width: 1279px) {
+/* Small Desktop (1024px - 1279px) */
+@media (max-width: 1279px) and (min-width: 1024px) {
   .hero {
-    padding: var(--spacing-100) var(--spacing-32);
+    padding: var(--spacing-140) var(--spacing-32);
   }
 }
 
-/* Tablet (768px - 1023px) */
-@media (max-width: 1023px) {
+/* Small Laptop (900px - 1023px) */
+@media (max-width: 1023px) and (min-width: 900px) {
   .hero {
-    padding: var(--spacing-80) var(--spacing-24);
+    padding: var(--spacing-120) var(--spacing-24);
   }
 
   .heroTitle {
     font-size: 48px;
-  }
-
-  .heroSubtitle {
-    font-size: var(--font-size-body);
   }
 
   .heroKeyboard {
@@ -125,15 +121,30 @@
   }
 }
 
-/* Mobile Landscape / Small Tablet (640px - 767px) */
-@media (max-width: 767px) {
+/* Tablet (640px - 899px) */
+@media (max-width: 899px) and (min-width: 640px) {
+  .hero {
+    padding: var(--spacing-80) var(--spacing-24);
+  }
+
+  .heroTitle {
+    font-size: 40px;
+  }
+
+  .heroKeyboard {
+    display: none;
+  }
+}
+
+/* Mobile Landscape (480px - 639px) */
+@media (max-width: 639px) and (min-width: 480px) {
   .hero {
     padding: var(--spacing-64) var(--spacing-16);
     min-height: calc(100vh - 64px);
   }
 
   .heroTitle {
-    font-size: 36px;
+    font-size: 32px;
     margin-bottom: var(--spacing-16);
   }
 
@@ -143,28 +154,21 @@
     max-width: 100%;
   }
 
-  .heroPattern {
-    width: 300px;
-    height: 300px;
-    right: -100px;
-    top: -50px;
-  }
-
-  .key {
-    min-width: 28px;
-    height: 28px;
-    font-size: 10px;
+  .heroKeyboard {
+    display: none;
   }
 }
 
-/* Mobile (max-width: 639px) */
-@media (max-width: 639px) {
+/* Mobile (max-width: 479px) */
+@media (max-width: 479px) {
   .hero {
     padding: var(--spacing-48) var(--spacing-12);
+    min-height: calc(100vh - 64px);
   }
 
   .heroTitle {
     font-size: 28px;
+    margin-bottom: var(--spacing-16);
   }
 
   .heroSubtitle {
