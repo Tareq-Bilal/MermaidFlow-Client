@@ -1,0 +1,25 @@
+.card {
+  background-color: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--card-radius);
+  padding: var(--card-padding-y) var(--card-padding-x);
+  box-shadow: var(--card-default-shadow);
+}
+
+.elevatedCard {
+  background-color: var(--card-bg);
+  border-radius: var(--card-elevated-radius);
+  box-shadow: var(--card-elevated-shadow);
+  padding: var(--card-padding-y) var(--card-padding-x);
+}
+
+.featureCard {
+  background-color: var(--card-bg);
+  border-radius: var(--card-feature-radius);
+  box-shadow: var(--card-feature-shadow);
+  padding: var(--card-feature-padding-y) var(--card-feature-padding-x);
+}
+
+.cardHover:hover {
+  border-color: var(--card-hover-border);
+}
