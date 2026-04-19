@@ -1,0 +1,48 @@
+.image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: var(--image-fit, cover);
+}
+
+/* Fit */
+.cover {
+  object-fit: cover;
+}
+
+.contain {
+  object-fit: contain;
+}
+
+.fill {
+  object-fit: fill;
+}
+
+.none {
+  object-fit: none;
+}
+
+/* Shapes */
+.shapeNone {
+  border-radius: 0;
+}
+
+.shapeSm {
+  border-radius: var(--image-shape-sm);
+}
+
+.shapeMd {
+  border-radius: var(--image-shape-md);
+}
+
+.shapeLg {
+  border-radius: var(--image-shape-lg);
+}
+
+.shapeXl {
+  border-radius: var(--image-shape-xl);
+}
+
+.shapeFull {
+  border-radius: var(--image-shape-full);
+}

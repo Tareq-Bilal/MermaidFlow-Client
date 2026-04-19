@@ -1,0 +1,102 @@
+.text {
+  font-family: var(--font-family-primary);
+  line-height: var(--text-body-height);
+}
+
+/* Variants */
+.display {
+  font-size: var(--text-display-size);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--text-display-height);
+}
+
+.section {
+  font-size: var(--text-section-size);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--text-section-height);
+}
+
+.heading {
+  font-size: var(--text-heading-size);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--text-heading-height);
+}
+
+.cardHeading {
+  font-size: var(--text-card-heading-size);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--text-card-heading-height);
+}
+
+.subheading {
+  font-size: var(--text-subheading-size);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--text-subheading-height);
+}
+
+.bodyLarge {
+  font-size: var(--text-body-large-size);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--text-body-large-height);
+}
+
+.body {
+  font-size: var(--text-body-size);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--text-body-height);
+}
+
+.caption {
+  font-size: var(--text-caption-size);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--text-caption-height);
+}
+
+.small {
+  font-size: var(--text-small-size);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--text-small-height);
+}
+
+/* Colors */
+.colorPrimary {
+  color: var(--text-color-primary);
+}
+
+.colorSecondary {
+  color: var(--text-color-secondary);
+}
+
+.colorMuted {
+  color: var(--text-color-muted);
+}
+
+.colorAccent {
+  color: var(--text-color-accent);
+}
+
+/* Alignment */
+.alignLeft {
+  text-align: left;
+}
+
+.alignCenter {
+  text-align: center;
+}
+
+.alignRight {
+  text-align: right;
+}
+
+/* Weights */
+.weightRegular {
+  font-weight: var(--font-weight-regular);
+}
+
+.weightMedium {
+  font-weight: var(--font-weight-medium);
+}
+
+.weightSemibold {
+  font-weight: var(--font-weight-semibold);
+}
