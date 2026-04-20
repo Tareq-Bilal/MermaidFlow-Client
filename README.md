@@ -1,6 +1,8 @@
-# Mermaid Flow Client
-
+# Mermaid Flow
 A modern, responsive landing page for Mermaid Flow built with Next.js and a custom design system.
+
+<img width="1920" height="1080" alt="Gemini_Generated_Image_cbehp1cbehp1cbeh" src="https://github.com/user-attachments/assets/c60cb455-2b57-486d-b925-8ef395fd1608" />
+
 
 ## About
 
