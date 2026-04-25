@@ -4,9 +4,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  text-align: center;
-  padding:
-    clamp(var(--spacing-80), 13vw, var(--spacing-160))
+  padding: clamp(var(--spacing-80), 13vw, var(--spacing-160))
     clamp(var(--spacing-16), 4vw, var(--spacing-40));
   min-height: calc(100vh - var(--nav-height));
   overflow: hidden;
@@ -30,7 +28,9 @@
 
 .heroContent {
   position: relative;
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   z-index: 1;
   width: 100%;
   max-width: 900px;
@@ -57,6 +57,7 @@
 
 .heroTitle {
   margin-bottom: var(--spacing-24);
+  width: 100%;
   font-size: clamp(1.75rem, 5vw + 0.75rem, var(--font-size-hero));
   font-weight: var(--font-weight-semibold);
   line-height: var(--line-height-tight);
@@ -64,9 +65,7 @@
 
 .heroSubtitle {
   margin-bottom: var(--spacing-40);
-  max-width: 640px;
-  margin-left: auto;
-  margin-right: auto;
+  width: 100%;
   font-size: clamp(1rem, 1.25vw + 0.75rem, var(--font-size-subheading));
   line-height: var(--line-height-relaxed);
 }
@@ -114,6 +113,18 @@
   }
 }
 
+/* Desktop: center-align title and subtitle */
+@media (min-width: 768px) {
+  .heroTitle {
+    text-align: center;
+  }
+
+  .heroSubtitle {
+    max-width: var(--container-md-max-width);
+    text-align: center;
+  }
+}
+
 /* Hide keyboard shortcut below large desktop */
 @media (max-width: 1279px) {
   .heroKeyboard {
@@ -122,9 +133,24 @@
 }
 
 /* Mobile: tighten margins, stack CTAs, fix min-height */
+@media (max-width: 767px) {
+  .hero {
+    padding: clamp(var(--spacing-48), 10vw, var(--spacing-80)) var(--spacing-20);
+  }
+
+  .heroContent {
+    padding: var(--spacing-24);
+  }
+}
+
 @media (max-width: 479px) {
   .hero {
     min-height: calc(100vh - 64px);
+    padding: clamp(var(--spacing-40), 8vw, var(--spacing-64)) var(--spacing-16);
+  }
+
+  .heroContent {
+    padding: var(--spacing-16);
   }
 
   .heroTitle {
@@ -133,11 +159,11 @@
 
   .heroSubtitle {
     margin-bottom: var(--spacing-24);
-    max-width: 100%;
   }
 
   .heroCtas {
     flex-direction: column;
     align-items: stretch;
+    width: 100%;
   }
 }
