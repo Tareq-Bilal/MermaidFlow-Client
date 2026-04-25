@@ -10,8 +10,7 @@ export default function Hero() {
       <Container size="lg" className={styles.heroContainer}>
         <div className={styles.heroContent}>
           <Text as="h1" variant="display" className={styles.heroTitle}>
-            Visual diagrams.{" "}
-            <span className={styles.heroTitleAccent}>Simplified.</span>
+            Design Stunning Mermaid Diagrams Directly from Text
           </Text>
 
           <Text
@@ -19,19 +18,10 @@ export default function Hero() {
             color="secondary"
             className={styles.heroSubtitle}
           >
-            Create beautiful flowcharts, sequence diagrams, and more with
-            Mermaid Flow. The powerful tool that makes technical documentation
-            effortless.
+            Turn your ideas into clear visual diagrams with easy-to-use Mermaid
+            syntax. Ideal for documentation, architecture design, and workflow
+            mapping.
           </Text>
-
-          <Flex justify="center" gap="lg" className={styles.heroCtas}>
-            <Button href="/download" variant="cta">
-              Download Free
-            </Button>
-            <Button href="/docs" variant="secondary">
-              View Documentation
-            </Button>
-          </Flex>
         </div>
       </Container>
     </section>

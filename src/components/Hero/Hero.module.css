@@ -5,7 +5,9 @@
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: var(--spacing-160) var(--spacing-32);
+  padding:
+    clamp(var(--spacing-80), 13vw, var(--spacing-160))
+    clamp(var(--spacing-16), 4vw, var(--spacing-40));
   min-height: calc(100vh - var(--nav-height));
   overflow: hidden;
 }
@@ -22,9 +24,15 @@
   pointer-events: none;
 }
 
+.heroContainer {
+  width: 100%;
+}
+
 .heroContent {
   position: relative;
+  text-align: center;
   z-index: 1;
+  width: 100%;
   max-width: 900px;
   margin-left: auto;
   margin-right: auto;
@@ -49,19 +57,25 @@
 
 .heroTitle {
   margin-bottom: var(--spacing-24);
-}
-
-.heroTitleAccent {
-  color: var(--color-accent-primary);
+  font-size: clamp(1.75rem, 5vw + 0.75rem, var(--font-size-hero));
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-tight);
 }
 
 .heroSubtitle {
   margin-bottom: var(--spacing-40);
   max-width: 640px;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: clamp(1rem, 1.25vw + 0.75rem, var(--font-size-subheading));
+  line-height: var(--line-height-relaxed);
 }
 
 .heroCtas {
+  display: flex;
   flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--spacing-12);
 }
 
 .heroKeyboard {
@@ -92,96 +106,38 @@
   margin-left: var(--spacing-4);
 }
 
-/* Large Desktop (1280px+) */
+/* ── Breakpoints ──────────────────────────────── */
+/* Large desktop: widen the hero content block */
 @media (min-width: 1280px) {
-  .hero {
-    padding: var(--spacing-160) var(--spacing-32);
+  .heroContent {
+    max-width: 1100px;
   }
 }
 
-/* Small Desktop (1024px - 1279px) */
-@media (max-width: 1279px) and (min-width: 1024px) {
-  .hero {
-    padding: var(--spacing-140) var(--spacing-32);
-  }
-}
-
-/* Small Laptop (900px - 1023px) */
-@media (max-width: 1023px) and (min-width: 900px) {
-  .hero {
-    padding: var(--spacing-120) var(--spacing-24);
-  }
-
-  .heroTitle {
-    font-size: 48px;
-  }
-
+/* Hide keyboard shortcut below large desktop */
+@media (max-width: 1279px) {
   .heroKeyboard {
     display: none;
   }
 }
 
-/* Tablet (640px - 899px) */
-@media (max-width: 899px) and (min-width: 640px) {
+/* Mobile: tighten margins, stack CTAs, fix min-height */
+@media (max-width: 479px) {
   .hero {
-    padding: var(--spacing-80) var(--spacing-24);
-  }
-
-  .heroTitle {
-    font-size: 40px;
-  }
-
-  .heroKeyboard {
-    display: none;
-  }
-}
-
-/* Mobile Landscape (480px - 639px) */
-@media (max-width: 639px) and (min-width: 480px) {
-  .hero {
-    padding: var(--spacing-64) var(--spacing-16);
     min-height: calc(100vh - 64px);
   }
 
   .heroTitle {
-    font-size: 32px;
     margin-bottom: var(--spacing-16);
   }
 
   .heroSubtitle {
-    font-size: var(--font-size-caption);
     margin-bottom: var(--spacing-24);
     max-width: 100%;
   }
 
-  .heroKeyboard {
-    display: none;
-  }
-}
-
-/* Mobile (max-width: 479px) */
-@media (max-width: 479px) {
-  .hero {
-    padding: var(--spacing-48) var(--spacing-12);
-    min-height: calc(100vh - 64px);
-  }
-
-  .heroTitle {
-    font-size: 28px;
-    margin-bottom: var(--spacing-16);
-  }
-
-  .heroSubtitle {
-    font-size: var(--font-size-small);
-    margin-bottom: var(--spacing-20);
-  }
-
-  .heroKeyboard {
-    display: none;
-  }
-
   .heroCtas {
     flex-direction: column;
-    width: 100%;
+    align-items: stretch;
   }
 }
