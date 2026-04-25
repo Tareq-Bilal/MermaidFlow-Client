@@ -1,10 +1,11 @@
-'use client';
+"use client";
 
-import { ReactNode, useEffect, useState } from 'react';
-import Link from 'next/link';
-import styles from './Nav.module.css';
+import { ReactNode, useEffect, useState } from "react";
+import Link from "next/link";
+import styles from "./Nav.module.css";
+import { MobileMenu } from "./MobileMenu";
 
-export type NavVariant = 'default';
+export type NavVariant = "default";
 
 export interface NavLink {
   href: string;
@@ -19,7 +20,7 @@ export interface NavProps {
   };
 }
 
-export function Nav({ links = [], logo = { text: 'Mermaid Flow' } }: NavProps) {
+export function Nav({ links = [], logo = { text: "Mermaid Flow" } }: NavProps) {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const closeMenu = () => setMenuOpen(false);
@@ -30,8 +31,8 @@ export function Nav({ links = [], logo = { text: 'Mermaid Flow' } }: NavProps) {
         setMenuOpen(false);
       }
     };
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   return (
@@ -61,7 +62,7 @@ export function Nav({ links = [], logo = { text: 'Mermaid Flow' } }: NavProps) {
       <button
         className={styles.hamburger}
         onClick={() => setMenuOpen((prev) => !prev)}
-        aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+        aria-label={menuOpen ? "Close menu" : "Open menu"}
         aria-expanded={menuOpen}
       >
         <span />
@@ -69,30 +70,7 @@ export function Nav({ links = [], logo = { text: 'Mermaid Flow' } }: NavProps) {
         <span />
       </button>
 
-      {menuOpen && (
-        <div className={styles.mobileMenu} role="dialog" aria-label="Navigation menu">
-          <nav className={styles.mobileNav}>
-            {links.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={styles.mobileNavLink}
-                onClick={closeMenu}
-              >
-                {link.label}
-              </Link>
-            ))}
-          </nav>
-          <div className={styles.mobileMenuFooter}>
-            <Link href="/login" className={styles.mobileNavLink} onClick={closeMenu}>
-              Sign In
-            </Link>
-            <Link href="/register" className={styles.mobileCta} onClick={closeMenu}>
-              Sign Up
-            </Link>
-          </div>
-        </div>
-      )}
+      {menuOpen && <MobileMenu links={links} onClose={closeMenu} />}
     </header>
   );
 }
