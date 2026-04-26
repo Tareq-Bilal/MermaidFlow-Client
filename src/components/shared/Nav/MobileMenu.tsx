@@ -1,5 +1,5 @@
-import Link from 'next/link';
-import styles from './MobileMenu.module.css';
+import Link from "next/link";
+import styles from "./MobileMenu.module.css";
 
 interface MobileMenuProps {
   links: { href: string; label: string }[];
@@ -8,7 +8,11 @@ interface MobileMenuProps {
 
 export function MobileMenu({ links, onClose }: MobileMenuProps) {
   return (
-    <div className={styles.mobileMenu} role="dialog" aria-label="Navigation menu">
+    <div
+      className={styles.mobileMenu}
+      role="dialog"
+      aria-label="Navigation menu"
+    >
       <nav className={styles.mobileNav}>
         {links.map((link) => (
           <Link
