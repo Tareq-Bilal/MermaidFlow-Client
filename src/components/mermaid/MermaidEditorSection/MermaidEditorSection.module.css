@@ -24,3 +24,10 @@
     flex-direction: column;
   }
 }
+
+/* ── Desktop: horizontal padding ────────────── */
+@media (min-width: 769px) {
+  .grid {
+    padding-inline: var(--spacing-24);
+  }
+}

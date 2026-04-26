@@ -21,7 +21,6 @@
   box-shadow: none !important;
   outline: none !important;
   field-sizing: initial !important;
-  /* Primary-color scrollbar */
   scrollbar-color: var(--color-accent-secondary) var(--color-surface-100);
   scrollbar-width: thin;
 }

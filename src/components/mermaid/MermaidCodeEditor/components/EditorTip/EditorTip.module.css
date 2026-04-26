@@ -18,7 +18,7 @@
 }
 
 .tipLink {
-  color: var(--color-accent-blue);
+  color: var(--color-accent-primary);
   text-decoration: none;
   transition: opacity var(--transition-fast);
 }

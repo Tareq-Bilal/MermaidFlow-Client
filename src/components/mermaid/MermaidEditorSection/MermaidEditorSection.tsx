@@ -68,7 +68,7 @@ export function MermaidEditorSection() {
 
   return (
     <section className={styles.section} aria-label="Mermaid diagram editor">
-      <Container size="lg">
+      <Container size="full">
         {/* Status bar */}
         {(validationError || saveStatus || isAuthenticated) && (
           <div
