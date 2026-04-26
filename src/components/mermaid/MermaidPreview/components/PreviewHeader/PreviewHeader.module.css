@@ -1,0 +1,17 @@
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+}
+
+.titleRow {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-8);
+}
+
+.titleIcon {
+  color: var(--color-text-medium-gray);
+  font-size: var(--font-size-body-large);
+  line-height: 1;
+}

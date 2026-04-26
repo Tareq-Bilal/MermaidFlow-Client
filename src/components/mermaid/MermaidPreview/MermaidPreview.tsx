@@ -1,0 +1,34 @@
+"use client";
+
+import { useMermaidRender } from "./hooks/useMermaidRender";
+import { useMermaidExport } from "./hooks/useMermaidExport";
+import { PreviewHeader } from "./components/PreviewHeader/PreviewHeader";
+import { ExportToolbar } from "./components/ExportToolbar/ExportToolbar";
+import { DiagramCanvas } from "./components/DiagramCanvas/DiagramCanvas";
+import styles from "./MermaidPreview.module.css";
+
+interface MermaidPreviewProps {
+  code: string;
+}
+
+export function MermaidPreview({ code }: MermaidPreviewProps) {
+  const { svg, error } = useMermaidRender(code);
+  const { handleExportSvg, handleExportPng, handleCopySvg, handleCopyPng } =
+    useMermaidExport(code, svg);
+
+  return (
+    <div className={styles.panel}>
+      <PreviewHeader />
+      <ExportToolbar
+        disabled={!svg}
+        onExportSvg={handleExportSvg}
+        onExportPng={handleExportPng}
+        onCopySvg={handleCopySvg}
+        onCopyPng={handleCopyPng}
+      />
+      <DiagramCanvas svg={svg} error={error} />
+    </div>
+  );
+}
+
+export default MermaidPreview;
