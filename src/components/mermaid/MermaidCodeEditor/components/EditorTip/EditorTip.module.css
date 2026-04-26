@@ -1,0 +1,29 @@
+.tip {
+  display: flex;
+  align-items: baseline;
+  gap: var(--spacing-6);
+  margin: 0;
+}
+
+.tipBulb {
+  font-size: var(--font-size-caption);
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.tipText {
+  font-size: var(--font-size-caption);
+  color: var(--color-text-medium-gray);
+  line-height: var(--line-height-relaxed);
+}
+
+.tipLink {
+  color: var(--color-accent-blue);
+  text-decoration: none;
+  transition: opacity var(--transition-fast);
+}
+
+.tipLink:hover {
+  opacity: 0.8;
+  text-decoration: underline;
+}

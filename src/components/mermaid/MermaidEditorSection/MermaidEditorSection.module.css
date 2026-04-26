@@ -1,0 +1,25 @@
+.section {
+  padding: var(--spacing-80) 0;
+  border-top: 1px solid var(--color-border-subtle);
+}
+
+/* ── Two-column flex grid ────────────────────── */
+.grid {
+  display: flex;
+  gap: var(--spacing-24);
+  align-items: stretch;
+}
+
+/* ── Individual panel card ───────────────────── */
+.panelCard {
+  flex: 1;
+  min-width: 0;
+  padding: var(--spacing-32) !important;
+}
+
+/* ── Responsive: stack vertically on small screens */
+@media (max-width: 768px) {
+  .grid {
+    flex-direction: column;
+  }
+}

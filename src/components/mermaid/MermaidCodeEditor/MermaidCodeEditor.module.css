@@ -1,0 +1,33 @@
+.panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-16);
+  height: 100%;
+}
+
+/* ── Textarea editor ─────────────────────────── */
+.editor {
+  min-height: 160px;
+  resize: vertical;
+  background-color: var(--color-surface-100) !important;
+  border: 1px solid var(--color-border) !important;
+  border-radius: var(--radius-lg) !important;
+  color: var(--color-text-near-white) !important;
+  font-family: var(--font-family-mono) !important;
+  font-size: var(--font-size-caption) !important;
+  line-height: var(--line-height-relaxed) !important;
+  padding: var(--spacing-12) !important;
+  box-shadow: none !important;
+  outline: none !important;
+  field-sizing: initial !important;
+}
+
+.editor::placeholder {
+  color: var(--color-text-dim-gray) !important;
+}
+
+.editor:focus-visible {
+  border-color: var(--color-border-high) !important;
+  box-shadow: none !important;
+  ring: none !important;
+}
