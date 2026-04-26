@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import mermaid from "mermaid";
 import { getToken } from "@/lib/auth";
-import { initMermaid } from "../lib/mermaidInit";
-import { renderViaApi } from "../lib/mermaidApi";
+import { initMermaid } from "@/components/mermaid/MermaidPreview/lib/mermaidInit";
+import { renderViaApi } from "@/components/mermaid/MermaidPreview/lib/mermaidApi";
 
 const RENDER_DEBOUNCE_MS = 300;
 

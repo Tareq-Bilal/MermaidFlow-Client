@@ -2,7 +2,7 @@
 
 import { useCallback } from "react";
 import { Textarea } from "@/components/ui/textarea";
-import { useEditorTab } from "./hooks/useEditorTab";
+import { useEditorTab } from "@/lib/hooks/useEditorTab";
 import { EditorHeader } from "./components/EditorHeader/EditorHeader";
 import { EditorTabBar } from "./components/EditorTabBar/EditorTabBar";
 import { EditorTip } from "./components/EditorTip/EditorTip";

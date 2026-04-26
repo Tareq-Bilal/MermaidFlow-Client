@@ -7,7 +7,8 @@
 
 /* ── Textarea editor ─────────────────────────── */
 .editor {
-  min-height: 160px;
+  flex: 1;
+  min-height: 320px;
   resize: vertical;
   background-color: var(--color-surface-100) !important;
   border: 1px solid var(--color-border) !important;
@@ -20,6 +21,24 @@
   box-shadow: none !important;
   outline: none !important;
   field-sizing: initial !important;
+  /* Primary-color scrollbar */
+  scrollbar-color: var(--color-accent-secondary) var(--color-surface-100);
+  scrollbar-width: thin;
+}
+
+.editor::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.editor::-webkit-scrollbar-track {
+  background: var(--color-surface-100);
+  border-radius: var(--radius-lg);
+}
+
+.editor::-webkit-scrollbar-thumb {
+  background-color: var(--color-accent-secondary);
+  border-radius: var(--radius-lg);
 }
 
 .editor::placeholder {

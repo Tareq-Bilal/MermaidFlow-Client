@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import { getToken } from "@/lib/auth";
-import { exportViaApi } from "../lib/mermaidApi";
+import { exportViaApi } from "@/components/mermaid/MermaidPreview/lib/mermaidApi";
 
 function svgToCanvas(svg: string): Promise<HTMLCanvasElement> {
   return new Promise((resolve, reject) => {

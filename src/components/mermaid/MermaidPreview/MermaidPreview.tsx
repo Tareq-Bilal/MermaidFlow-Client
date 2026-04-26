@@ -1,7 +1,7 @@
 "use client";
 
-import { useMermaidRender } from "./hooks/useMermaidRender";
-import { useMermaidExport } from "./hooks/useMermaidExport";
+import { useMermaidRender } from "@/lib/hooks/useMermaidRender";
+import { useMermaidExport } from "@/lib/hooks/useMermaidExport";
 import { PreviewHeader } from "./components/PreviewHeader/PreviewHeader";
 import { ExportToolbar } from "./components/ExportToolbar/ExportToolbar";
 import { DiagramCanvas } from "./components/DiagramCanvas/DiagramCanvas";

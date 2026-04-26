@@ -1,5 +1,5 @@
 import { memo } from "react";
-import type { EditorTab } from "../../hooks/useEditorTab";
+import type { EditorTab } from "@/lib/hooks/useEditorTab";
 import styles from "./EditorTabBar.module.css";
 
 interface EditorTabBarProps {

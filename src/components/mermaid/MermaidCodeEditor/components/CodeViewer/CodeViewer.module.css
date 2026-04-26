@@ -19,9 +19,29 @@
   line-height: var(--line-height-relaxed);
   color: var(--color-text-light-gray);
   overflow-x: auto;
+  overflow-y: auto;
   white-space: pre;
-  min-height: 80px;
+  min-height: 180px;
+  max-height: 320px;
   margin: 0;
+  /* Primary-color scrollbar */
+  scrollbar-color: var(--color-accent-secondary) var(--color-key-start);
+  scrollbar-width: thin;
+}
+
+.codeContent::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.codeContent::-webkit-scrollbar-track {
+  background: var(--color-key-start);
+  border-radius: var(--radius-lg);
+}
+
+.codeContent::-webkit-scrollbar-thumb {
+  background-color: var(--color-accent-secondary);
+  border-radius: var(--radius-lg);
 }
 
 .statusBar {
