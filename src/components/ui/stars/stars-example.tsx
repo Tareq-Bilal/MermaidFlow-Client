@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/shared";
 import { StarsBackground } from "./stars";
 
 export default function StarsBackgroundExample() {

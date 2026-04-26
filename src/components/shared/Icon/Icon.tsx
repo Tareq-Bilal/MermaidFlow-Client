@@ -7,9 +7,16 @@ export interface IconProps {
   className?: string;
 }
 
-export function Icon({ icon: IconComponent, size = 32, className = "" }: IconProps) {
+export function Icon({
+  icon: IconComponent,
+  size = 48,
+  className = "",
+}: IconProps) {
   return (
-    <span className={`${styles.icon} ${className}`} style={{ width: size, height: size }}>
+    <span
+      className={`${styles.icon} ${className}`}
+      style={{ width: size, height: size }}
+    >
       <IconComponent />
     </span>
   );
