@@ -46,17 +46,17 @@ export function useMermaidRender(code: string): UseMermaidRenderResult {
       } else {
         const diagramId = `mermaid-${currentRender}-${Date.now()}`;
         try {
+          // Parse first — prevents mermaid from injecting its error SVG into the DOM
+          await mermaid.parse(code);
           const { svg: renderedSvg } = await mermaid.render(diagramId, code);
           if (currentRender === renderCountRef.current) {
             setSvg(renderedSvg);
             setError(null);
           }
-        } catch (err: unknown) {
+        } catch {
           if (currentRender === renderCountRef.current) {
-            setError(
-              err instanceof Error ? err.message : "Invalid diagram syntax",
-            );
             setSvg("");
+            setError("invalid");
           }
         }
       }

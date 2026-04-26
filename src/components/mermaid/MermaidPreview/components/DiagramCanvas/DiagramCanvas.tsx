@@ -1,27 +1,13 @@
 import { Text } from "@/components/shared";
+import { InvalidState } from "../InvalidState/InvalidState";
 import styles from "./DiagramCanvas.module.css";
 
 interface DiagramCanvasProps {
   svg: string;
-  error: string | null;
+  invalid?: boolean;
 }
 
-export function DiagramCanvas({ svg, error }: DiagramCanvasProps) {
-  if (error) {
-    return (
-      <div className={styles.canvas}>
-        <div className={styles.errorState}>
-          <Text variant="caption" color="muted" align="center">
-            Diagram error
-          </Text>
-          <Text variant="small" color="muted" align="center">
-            {error}
-          </Text>
-        </div>
-      </div>
-    );
-  }
-
+export function DiagramCanvas({ svg, invalid }: DiagramCanvasProps) {
   if (svg) {
     return (
       <div className={styles.canvas}>
@@ -31,6 +17,14 @@ export function DiagramCanvas({ svg, error }: DiagramCanvasProps) {
           // eslint-disable-next-line react/no-danger
           dangerouslySetInnerHTML={{ __html: svg }}
         />
+      </div>
+    );
+  }
+
+  if (invalid) {
+    return (
+      <div className={`${styles.canvas} ${styles.canvasInvalid}`}>
+        <InvalidState />
       </div>
     );
   }

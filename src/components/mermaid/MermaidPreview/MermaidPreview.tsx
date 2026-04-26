@@ -26,7 +26,7 @@ export function MermaidPreview({ code }: MermaidPreviewProps) {
         onCopySvg={handleCopySvg}
         onCopyPng={handleCopyPng}
       />
-      <DiagramCanvas svg={svg} error={error} />
+      <DiagramCanvas svg={svg} invalid={Boolean(error)} />
     </div>
   );
 }

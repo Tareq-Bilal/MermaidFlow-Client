@@ -26,8 +26,13 @@
   height: auto;
 }
 
+.canvasInvalid {
+  background-color: var(--color-red-transparent);
+  border-color: var(--color-error);
+}
+
 .emptyState,
-.errorState {
+.invalidState {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -37,6 +42,6 @@
   text-align: center;
 }
 
-.errorState {
+.invalidState {
   gap: var(--spacing-4);
 }
