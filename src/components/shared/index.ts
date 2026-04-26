@@ -24,5 +24,7 @@ export type { CardVariant } from './Card/Card';
 export { Button, default as ButtonDefault } from './Button/Button';
 export type { ButtonVariant } from './Button/Button';
 
+export { Icon, default as IconDefault } from './Icon/Icon';
+
 export { Nav, default as NavDefault } from './Nav/Nav';
 export type { NavLink, NavVariant } from './Nav/Nav';

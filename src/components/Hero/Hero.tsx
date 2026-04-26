@@ -1,10 +1,11 @@
 import { Container, Text, Flex, Button } from "@/components/shared";
+import { StarsBackground } from "@/components/ui/stars/stars";
 import styles from "./Hero.module.css";
 
 export default function Hero() {
   return (
     <section className={styles.hero}>
-      <div className={styles.heroBackground} />
+      <StarsBackground className={styles.heroStars} />
       <div className={styles.heroPattern} />
 
       <Container size="lg" className={styles.heroContainer}>
