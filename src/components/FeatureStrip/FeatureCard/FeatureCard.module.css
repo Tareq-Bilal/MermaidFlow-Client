@@ -1,56 +1,56 @@
-/* ── Local accent tokens ──────────────────────── */
+/* -- Local accent tokens ------------------------ */
 .cardWrapper {
   --feature-icon-purple: #a855f7;
   --feature-icon-orange: #f97316;
 }
 
-/* ── Slide-in animation ────────────────────────── */
-@keyframes slideInFromLeft {
+/* -- Fade-up animation --------------------------- */
+@keyframes fadeSlideUp {
   from {
     opacity: 0;
-    transform: translateX(-40px);
+    transform: translateY(28px);
   }
   to {
     opacity: 1;
-    transform: translateX(0);
+    transform: translateY(0);
   }
 }
 
-/* ── Wrapper — handles animation & flex sizing ── */
+/* -- Wrapper ----------------------------------- */
 .cardWrapper {
   flex: 1;
   min-width: 0;
   opacity: 0;
-  transform: translateX(-40px);
+  transform: translateY(28px);
 }
 
 .cardVisible {
-  animation: slideInFromLeft 600ms ease-out both;
+  animation: fadeSlideUp 560ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
-/* ── Inner Card layout ────────────────────────── */
+/* -- Card --------------------------------------- */
 .card {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--spacing-16);
+  gap: var(--spacing-20);
   height: 100%;
+  padding: var(--spacing-32);
+  border-radius: var(--radius-3xl);
+  background: var(--color-surface-card);
+  border: 1px solid var(--color-border);
 }
 
-/* ── Icon wrapper ─────────────────────────────── */
+/* -- Icon --------------------------------------- */
 .iconWrap {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
   line-height: 0;
-  padding: var(--spacing-16);
-  border-radius: var(--radius-xl);
-  background: var(--color-surface-100);
-  border: 1px solid var(--color-border-medium);
 }
 
-/* ── Per-icon colours ─────────────────────────── */
+/* -- Per-icon colours --------------------------- */
 .iconBlue {
   color: var(--color-accent-blue);
 }
@@ -67,23 +67,23 @@
   color: var(--feature-icon-orange);
 }
 
-/* ── Label ────────────────────────────────────── */
+/* -- Label -------------------------------------- */
 .label {
-  font-size: var(--font-size-body);
-  font-weight: var(--font-weight-medium);
-  color: var(--color-text-light-gray);
+  font-size: var(--font-size-heading);
   text-align: center;
-  letter-spacing: var(--letter-spacing-tight);
-  line-height: var(--line-height-normal);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-near-white);
+  letter-spacing: var(--letter-spacing-none);
+  line-height: var(--line-height-snug);
 }
 
-/* ── Description ─────────────────────────────── */
+/* -- Description ------------------------------- */
 .description {
-  max-width: 180px;
-  color: var(--color-text-dim-gray);
+  color: var(--color-text-medium-gray);
+  line-height: var(--line-height-relaxed);
 }
 
-/* ── Responsive ──────────────────────────────── */
+/* -- Responsive -------------------------------- */
 
 /* Tablet portrait: 2-column */
 @media (max-width: 767px) {
@@ -91,20 +91,12 @@
     flex: none;
     width: calc(50% - var(--spacing-8));
   }
-
-  .description {
-    max-width: 220px;
-  }
 }
 
 /* Mobile: single column */
 @media (max-width: 479px) {
   .cardWrapper {
     width: 100%;
-    max-width: 320px;
-  }
-
-  .description {
-    max-width: 260px;
+    max-width: 360px;
   }
 }

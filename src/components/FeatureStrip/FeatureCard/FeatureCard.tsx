@@ -61,7 +61,7 @@ export function FeatureCard({
           {label}
         </Text>
         <Text
-          variant="caption"
+          variant="body"
           color="muted"
           align="center"
           as="span"
