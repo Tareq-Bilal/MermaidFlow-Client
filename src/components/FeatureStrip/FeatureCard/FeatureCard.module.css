@@ -85,6 +85,22 @@
 
 /* -- Responsive -------------------------------- */
 
+/* Medium desktop (1024px – 1279px): 2-column */
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .cardWrapper {
+    flex: none;
+    width: calc(50% - var(--spacing-20));
+  }
+}
+
+/* Large tablet: 2-column */
+@media (max-width: 1023px) {
+  .cardWrapper {
+    flex: none;
+    width: calc(50% - var(--spacing-16));
+  }
+}
+
 /* Tablet portrait: 2-column */
 @media (max-width: 767px) {
   .cardWrapper {
