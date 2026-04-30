@@ -1,0 +1,110 @@
+/* ── Local accent tokens ──────────────────────── */
+.cardWrapper {
+  --feature-icon-purple: #a855f7;
+  --feature-icon-orange: #f97316;
+}
+
+/* ── Slide-in animation ────────────────────────── */
+@keyframes slideInFromLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* ── Wrapper — handles animation & flex sizing ── */
+.cardWrapper {
+  flex: 1;
+  min-width: 0;
+  opacity: 0;
+  transform: translateX(-40px);
+}
+
+.cardVisible {
+  animation: slideInFromLeft 600ms ease-out both;
+}
+
+/* ── Inner Card layout ────────────────────────── */
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-16);
+  height: 100%;
+}
+
+/* ── Icon wrapper ─────────────────────────────── */
+.iconWrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  line-height: 0;
+  padding: var(--spacing-16);
+  border-radius: var(--radius-xl);
+  background: var(--color-surface-100);
+  border: 1px solid var(--color-border-medium);
+}
+
+/* ── Per-icon colours ─────────────────────────── */
+.iconBlue {
+  color: var(--color-accent-blue);
+}
+
+.iconGreen {
+  color: var(--color-accent-green);
+}
+
+.iconPurple {
+  color: var(--feature-icon-purple);
+}
+
+.iconOrange {
+  color: var(--feature-icon-orange);
+}
+
+/* ── Label ────────────────────────────────────── */
+.label {
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-light-gray);
+  text-align: center;
+  letter-spacing: var(--letter-spacing-tight);
+  line-height: var(--line-height-normal);
+}
+
+/* ── Description ─────────────────────────────── */
+.description {
+  max-width: 180px;
+  color: var(--color-text-dim-gray);
+}
+
+/* ── Responsive ──────────────────────────────── */
+
+/* Tablet portrait: 2-column */
+@media (max-width: 767px) {
+  .cardWrapper {
+    flex: none;
+    width: calc(50% - var(--spacing-8));
+  }
+
+  .description {
+    max-width: 220px;
+  }
+}
+
+/* Mobile: single column */
+@media (max-width: 479px) {
+  .cardWrapper {
+    width: 100%;
+    max-width: 320px;
+  }
+
+  .description {
+    max-width: 260px;
+  }
+}
