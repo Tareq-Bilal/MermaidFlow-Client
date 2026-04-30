@@ -18,8 +18,8 @@
 
 /* -- Wrapper ----------------------------------- */
 .cardWrapper {
-  flex: 1;
-  min-width: 0;
+  flex: 0 0 280px;
+  width: 280px;
   opacity: 0;
   transform: translateY(28px);
 }

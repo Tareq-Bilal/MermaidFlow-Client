@@ -8,8 +8,8 @@
 .list {
   display: flex;
   align-items: stretch;
-  justify-content: space-between;
-  gap: var(--spacing-24);
+  justify-content: center;
+  gap: var(--spacing-64);
 }
 
 /* ── Breakpoints ──────────────────────────────── */
@@ -17,7 +17,7 @@
 /* Small desktop / large tablet */
 @media (max-width: 1023px) {
   .list {
-    gap: var(--spacing-16);
+    gap: var(--spacing-32);
   }
 }
 
