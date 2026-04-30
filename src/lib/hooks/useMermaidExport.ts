@@ -1,43 +1,74 @@
 import { useCallback } from "react";
+import { toast } from "sonner";
 import { getToken } from "@/lib/auth";
 import { exportViaApi } from "@/components/mermaid/MermaidPreview/lib/mermaidApi";
 
-function svgToCanvas(svg: string): Promise<HTMLCanvasElement> {
+// ─── Utilities ───────────────────────────────────────────────────────────────
+
+function getSvgDimensions(svgEl: Element): { width: number; height: number } {
+  const rawW = svgEl.getAttribute("width") ?? "";
+  const rawH = svgEl.getAttribute("height") ?? "";
+  const isRelative = (v: string) => !v || v.includes("%");
+
+  if (!isRelative(rawW) && !isRelative(rawH)) {
+    return { width: parseFloat(rawW), height: parseFloat(rawH) };
+  }
+
+  const parts =
+    svgEl
+      .getAttribute("viewBox")
+      ?.trim()
+      .split(/[\s,]+/) ?? [];
+  return {
+    width: parseFloat(parts[2]) || 800,
+    height: parseFloat(parts[3]) || 600,
+  };
+}
+
+function svgToPngBlob(svg: string): Promise<Blob> {
   return new Promise((resolve, reject) => {
-    const blob = new Blob([svg], { type: "image/svg+xml;charset=utf-8" });
-    const url = URL.createObjectURL(blob);
+    const doc = new DOMParser().parseFromString(svg, "image/svg+xml");
+    const svgEl = doc.documentElement;
+    const { width, height } = getSvgDimensions(svgEl);
+
+    svgEl.setAttribute("width", String(width));
+    svgEl.setAttribute("height", String(height));
+
+    const dataUrl = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(
+      new XMLSerializer().serializeToString(svgEl),
+    )}`;
+
     const img = new Image();
 
     img.onload = () => {
       const canvas = document.createElement("canvas");
-      canvas.width = img.naturalWidth || 800;
-      canvas.height = img.naturalHeight || 600;
-      const ctx = canvas.getContext("2d");
-      if (!ctx) {
-        URL.revokeObjectURL(url);
-        reject(new Error("Canvas context unavailable"));
-        return;
-      }
-      ctx.drawImage(img, 0, 0);
-      URL.revokeObjectURL(url);
-      resolve(canvas);
+      canvas.width = width;
+      canvas.height = height;
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      const ctx = canvas.getContext("2d")!;
+      ctx.fillStyle = "#ffffff";
+      ctx.fillRect(0, 0, width, height);
+      ctx.drawImage(img, 0, 0, width, height);
+      canvas.toBlob(
+        (blob) =>
+          blob ? resolve(blob) : reject(new Error("Failed to create PNG blob")),
+        "image/png",
+      );
     };
 
-    img.onerror = () => {
-      URL.revokeObjectURL(url);
-      reject(new Error("Failed to load SVG as image"));
-    };
-
-    img.src = url;
+    img.onerror = () => reject(new Error("Failed to render SVG"));
+    img.src = dataUrl;
   });
 }
 
 function triggerDownload(url: string, filename: string): void {
-  const a = document.createElement("a");
-  a.href = url;
-  a.download = filename;
-  a.click();
+  Object.assign(document.createElement("a"), {
+    href: url,
+    download: filename,
+  }).click();
 }
+
+// ─── Hook ─────────────────────────────────────────────────────────────────────
 
 export interface UseMermaidExportResult {
   handleExportSvg: () => Promise<void>;
@@ -51,49 +82,56 @@ export function useMermaidExport(
   svg: string,
 ): UseMermaidExportResult {
   const handleExportSvg = useCallback(async () => {
-    if (getToken()) {
-      await exportViaApi(code, "svg");
-      return;
+    try {
+      if (getToken()) {
+        await exportViaApi(code, "svg");
+      } else {
+        const url = URL.createObjectURL(
+          new Blob([svg], { type: "image/svg+xml" }),
+        );
+        triggerDownload(url, "diagram.svg");
+        URL.revokeObjectURL(url);
+      }
+      toast.success("SVG exported");
+    } catch {
+      toast.error("Failed to export SVG");
     }
-    const blob = new Blob([svg], { type: "image/svg+xml" });
-    const url = URL.createObjectURL(blob);
-    triggerDownload(url, "diagram.svg");
-    URL.revokeObjectURL(url);
+  }, [code, svg]);
+
+  const handleExportPng = useCallback(async () => {
+    try {
+      if (getToken()) {
+        await exportViaApi(code, "png");
+      } else {
+        const blob = await svgToPngBlob(svg);
+        const url = URL.createObjectURL(blob);
+        triggerDownload(url, "diagram.png");
+        URL.revokeObjectURL(url);
+      }
+      toast.success("PNG exported");
+    } catch {
+      toast.error("Failed to export PNG");
+    }
   }, [code, svg]);
 
   const handleCopySvg = useCallback(async () => {
     try {
       await navigator.clipboard.writeText(svg);
+      toast.success("SVG copied to clipboard");
     } catch {
-      // Clipboard API may be unavailable in some contexts
+      toast.error("Failed to copy SVG");
     }
   }, [svg]);
 
-  const handleExportPng = useCallback(async () => {
-    if (getToken()) {
-      await exportViaApi(code, "png");
-      return;
-    }
-    const canvas = await svgToCanvas(svg);
-    canvas.toBlob((blob) => {
-      if (!blob) return;
-      const url = URL.createObjectURL(blob);
-      triggerDownload(url, "diagram.png");
-      URL.revokeObjectURL(url);
-    }, "image/png");
-  }, [code, svg]);
-
   const handleCopyPng = useCallback(async () => {
     try {
-      const canvas = await svgToCanvas(svg);
-      canvas.toBlob(async (blob) => {
-        if (!blob) return;
-        await navigator.clipboard.write([
-          new ClipboardItem({ "image/png": blob }),
-        ]);
-      }, "image/png");
+      const blob = await svgToPngBlob(svg);
+      await navigator.clipboard.write([
+        new ClipboardItem({ "image/png": blob }),
+      ]);
+      toast.success("PNG copied to clipboard");
     } catch {
-      // Clipboard API may be unavailable in some contexts
+      toast.error("Failed to copy PNG");
     }
   }, [svg]);
 

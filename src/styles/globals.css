@@ -58,6 +58,23 @@ img {
   color: var(--color-text-primary);
 }
 
+/* Sonner toast bottom offset — responsive via breakpoints */
+:root {
+  --sonner-bottom-offset: var(--spacing-16);
+}
+
+@media (min-width: 640px) {
+  :root {
+    --sonner-bottom-offset: var(--spacing-24);
+  }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --sonner-bottom-offset: var(--spacing-32);
+  }
+}
+
 @theme inline {
   --font-heading: var(--font-sans);
   --font-sans: var(--font-sans);
