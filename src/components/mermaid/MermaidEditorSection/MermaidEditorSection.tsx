@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback, useRef } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Container, Card } from "@/components/shared";
 import { MermaidCodeEditor } from "../MermaidCodeEditor/MermaidCodeEditor";
 import { MermaidPreview } from "../MermaidPreview/MermaidPreview";
@@ -10,12 +10,13 @@ import type { MermaidValidationResponse, DocumentResponse } from "@/types/api";
 import { DEFAULT_MERMAID_CODE } from "@/config/mermaidDefaults";
 import styles from "./MermaidEditorSection.module.css";
 
+type SaveState = { message: string | null; saving: boolean };
+const IDLE_SAVE: SaveState = { message: null, saving: false };
+
 export function MermaidEditorSection() {
   const [code, setCode] = useState(DEFAULT_MERMAID_CODE);
   const [validationError, setValidationError] = useState<string | null>(null);
-  const [saveStatus, setSaveStatus] = useState<string | null>(null);
-  const [saving, setSaving] = useState(false);
-  const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const [saveState, setSaveState] = useState<SaveState>(IDLE_SAVE);
 
   // Debounced validation — only when authenticated
   useEffect(() => {
@@ -23,8 +24,7 @@ export function MermaidEditorSection() {
       setValidationError(null);
       return;
     }
-    if (debounceRef.current) clearTimeout(debounceRef.current);
-    debounceRef.current = setTimeout(async () => {
+    const id = setTimeout(async () => {
       try {
         const result = await apiFetch<MermaidValidationResponse>(
           "/mermaid/validate",
@@ -37,15 +37,12 @@ export function MermaidEditorSection() {
         // skip validation errors silently
       }
     }, 600);
-    return () => {
-      if (debounceRef.current) clearTimeout(debounceRef.current);
-    };
+    return () => clearTimeout(id);
   }, [code]);
 
   const handleSave = useCallback(async () => {
     if (!getToken()) return;
-    setSaving(true);
-    setSaveStatus(null);
+    setSaveState({ message: null, saving: true });
     try {
       await apiFetch<DocumentResponse>("/documents", {
         method: "POST",
@@ -56,11 +53,9 @@ export function MermaidEditorSection() {
           tags: [],
         }),
       });
-      setSaveStatus("Saved to your documents.");
+      setSaveState({ message: "Saved to your documents.", saving: false });
     } catch {
-      setSaveStatus("Failed to save.");
-    } finally {
-      setSaving(false);
+      setSaveState({ message: "Failed to save.", saving: false });
     }
   }, [code]);
 
@@ -70,7 +65,7 @@ export function MermaidEditorSection() {
     <section className={styles.section} aria-label="Mermaid diagram editor">
       <Container size="full">
         {/* Status bar */}
-        {(validationError || saveStatus || isAuthenticated) && (
+        {(validationError || saveState.message || isAuthenticated) && (
           <div
             style={{
               display: "flex",
@@ -91,27 +86,27 @@ export function MermaidEditorSection() {
             <div
               style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}
             >
-              {saveStatus && (
+              {saveState.message && (
                 <span
                   style={{
                     fontSize: "0.8rem",
                     color: "var(--color-text-muted, #888)",
                   }}
                 >
-                  {saveStatus}
+                  {saveState.message}
                 </span>
               )}
               {isAuthenticated && (
                 <button
                   onClick={handleSave}
-                  disabled={saving}
+                  disabled={saveState.saving}
                   style={{
                     padding: "0.3rem 0.8rem",
                     fontSize: "0.8rem",
-                    cursor: saving ? "default" : "pointer",
+                    cursor: saveState.saving ? "default" : "pointer",
                   }}
                 >
-                  {saving ? "Saving…" : "Save Document"}
+                  {saveState.saving ? "Saving…" : "Save Document"}
                 </button>
               )}
             </div>

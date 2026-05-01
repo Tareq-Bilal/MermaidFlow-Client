@@ -6,64 +6,50 @@ import { renderViaApi } from "@/components/mermaid/MermaidPreview/lib/mermaidApi
 
 const RENDER_DEBOUNCE_MS = 300;
 
+type RenderState = { svg: string; error: string | null };
+const EMPTY: RenderState = { svg: "", error: null };
+
 export interface UseMermaidRenderResult {
   svg: string;
   error: string | null;
 }
 
 export function useMermaidRender(code: string): UseMermaidRenderResult {
-  const [svg, setSvg] = useState<string>("");
-  const [error, setError] = useState<string | null>(null);
-  const renderCountRef = useRef(0);
+  const [state, setState] = useState<RenderState>(EMPTY);
+  const seq = useRef(0);
 
   useEffect(() => {
-    initMermaid();
-  }, []);
+    initMermaid(); // idempotent — no-op after first call
 
-  useEffect(() => {
     if (!code.trim()) {
-      setSvg("");
-      setError(null);
+      setState(EMPTY);
       return;
     }
 
-    const timerId = setTimeout(async () => {
-      const currentRender = ++renderCountRef.current;
+    const id = setTimeout(async () => {
+      const n = ++seq.current;
 
       if (getToken()) {
         try {
-          const renderedSvg = await renderViaApi(code);
-          if (currentRender === renderCountRef.current) {
-            setSvg(renderedSvg);
-            setError(null);
-          }
+          const svg = await renderViaApi(code);
+          if (n === seq.current) setState({ svg, error: null });
         } catch {
-          if (currentRender === renderCountRef.current) {
-            setError("Failed to render diagram.");
-            setSvg("");
-          }
+          if (n === seq.current)
+            setState({ svg: "", error: "Failed to render diagram." });
         }
       } else {
-        const diagramId = `mermaid-${currentRender}-${Date.now()}`;
         try {
-          // Parse first — prevents mermaid from injecting its error SVG into the DOM
-          await mermaid.parse(code);
-          const { svg: renderedSvg } = await mermaid.render(diagramId, code);
-          if (currentRender === renderCountRef.current) {
-            setSvg(renderedSvg);
-            setError(null);
-          }
+          await mermaid.parse(code); // prevents mermaid injecting error SVG into DOM
+          const { svg } = await mermaid.render(`mermaid-${n}`, code);
+          if (n === seq.current) setState({ svg, error: null });
         } catch {
-          if (currentRender === renderCountRef.current) {
-            setSvg("");
-            setError("invalid");
-          }
+          if (n === seq.current) setState({ svg: "", error: "invalid" });
         }
       }
     }, RENDER_DEBOUNCE_MS);
 
-    return () => clearTimeout(timerId);
+    return () => clearTimeout(id);
   }, [code]);
 
-  return { svg, error };
+  return state;
 }
