@@ -4,7 +4,11 @@ import styles from "./FeatureStrip.module.css";
 
 export function FeatureStrip() {
   return (
-    <section className={styles.featureStrip} aria-label="Features">
+    <section
+      id="features"
+      className={styles.featureStrip}
+      aria-label="Features"
+    >
       <Container size="lg">
         <div className={styles.list}>
           <FeatureCard

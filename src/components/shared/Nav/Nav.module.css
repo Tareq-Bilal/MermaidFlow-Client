@@ -13,6 +13,12 @@
   -webkit-backdrop-filter: blur(12px);
 }
 
+.logoGroup {
+  display: flex;
+  align-items: center;
+  gap: var(--nav-link-gap);
+}
+
 .logo {
   display: flex;
   align-items: center;
@@ -26,7 +32,6 @@
 .logoIcon {
   width: var(--nav-logo-size);
   height: var(--nav-logo-size);
-  background-color: var(--color-accent-primary);
   border-radius: var(--radius-md);
 }
 

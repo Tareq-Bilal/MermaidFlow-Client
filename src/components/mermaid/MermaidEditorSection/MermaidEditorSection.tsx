@@ -62,7 +62,11 @@ export function MermaidEditorSection() {
   const isAuthenticated = Boolean(getToken());
 
   return (
-    <section className={styles.section} aria-label="Mermaid diagram editor">
+    <section
+      id="editor"
+      className={styles.section}
+      aria-label="Mermaid diagram editor"
+    >
       <Container size="full">
         {/* Status bar */}
         {(validationError || saveState.message || isAuthenticated) && (

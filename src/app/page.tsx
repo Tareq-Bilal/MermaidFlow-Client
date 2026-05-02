@@ -5,9 +5,8 @@ import { MermaidEditorSection } from "@/components/mermaid/MermaidEditorSection/
 
 export default function Home() {
   const navLinks = [
-    { href: "/features", label: "Features" },
-    { href: "/docs", label: "Docs" },
-    { href: "/pricing", label: "Pricing" },
+    { href: "#features", label: "Features" },
+    { href: "#editor", label: "Editor" },
   ];
 
   return (

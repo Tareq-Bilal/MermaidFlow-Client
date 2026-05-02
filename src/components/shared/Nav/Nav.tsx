@@ -2,6 +2,7 @@
 
 import { ReactNode, useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import styles from "./Nav.module.css";
 import { MobileMenu } from "./MobileMenu";
 
@@ -37,18 +38,27 @@ export function Nav({ links = [], logo = { text: "Mermaid Flow" } }: NavProps) {
 
   return (
     <header className={styles.navbar}>
-      <Link href="/" className={styles.logo} onClick={closeMenu}>
-        <div className={styles.logoIcon} />
-        <span>{logo.text}</span>
-      </Link>
+      <div className={styles.logoGroup}>
+        <Link href="/" className={styles.logo} onClick={closeMenu}>
+          <Image
+            src="/NavIcon.png"
+            alt="Mermaid Flow logo"
+            width={28}
+            height={28}
+            className={styles.logoIcon}
+            priority
+          />
+          <span>{logo.text}</span>
+        </Link>
 
-      <nav className={styles.nav}>
-        {links.map((link) => (
-          <Link key={link.href} href={link.href} className={styles.navLink}>
-            {link.label}
-          </Link>
-        ))}
-      </nav>
+        <nav className={styles.nav}>
+          {links.map((link) => (
+            <Link key={link.href} href={link.href} className={styles.navLink}>
+              {link.label}
+            </Link>
+          ))}
+        </nav>
+      </div>
 
       <div className={styles.navRight}>
         <Link href="/login" className={styles.navLink}>
