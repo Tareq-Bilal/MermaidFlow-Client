@@ -10,6 +10,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "@better-auth/infra": "^0.2.5",
     "@reduxjs/toolkit": "^2.0.0",
     "axios": "^1.6.0",
     "class-variance-authority": "^0.7.1",

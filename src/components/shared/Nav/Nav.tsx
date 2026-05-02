@@ -28,7 +28,12 @@ export function Nav({ links = [], logo = { text: "Mermaid Flow" } }: NavProps) {
 
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth > 767) {
+      const md = parseInt(
+        getComputedStyle(document.documentElement).getPropertyValue(
+          "--breakpoint-md",
+        ),
+      );
+      if (window.innerWidth >= md) {
         setMenuOpen(false);
       }
     };
@@ -43,8 +48,8 @@ export function Nav({ links = [], logo = { text: "Mermaid Flow" } }: NavProps) {
           <Image
             src="/NavIcon.png"
             alt="Mermaid Flow logo"
-            width={28}
-            height={28}
+            width={48}
+            height={48}
             className={styles.logoIcon}
             priority
           />

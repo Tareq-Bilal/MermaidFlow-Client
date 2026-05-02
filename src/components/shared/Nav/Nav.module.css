@@ -23,7 +23,7 @@
   display: flex;
   align-items: center;
   gap: var(--nav-logo-gap);
-  font-size: var(--button-font-size);
+  font-size: var(--font-size-heading);
   font-weight: var(--button-font-weight);
   color: var(--text-color-primary);
   flex-shrink: 0;
@@ -44,6 +44,7 @@
 .navLink {
   font-size: var(--button-font-size);
   font-weight: var(--font-weight-medium);
+  margin-top: var(--spacing-6);
   letter-spacing: var(--button-letter-spacing);
   color: var(--nav-link-color);
   transition: color var(--button-transition);
@@ -51,7 +52,8 @@
 
 .navLink:hover {
   color: var(--nav-link-hover-color);
-  text-decoration: none;
+  text-decoration: underline var(--color-accent-primary) 2px;
+  text-underline-offset: 4px;
 }
 
 .navRight {
