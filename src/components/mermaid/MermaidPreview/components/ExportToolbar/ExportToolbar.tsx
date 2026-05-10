@@ -1,5 +1,6 @@
 import { useMemo } from "react";
 import { FileDown, Camera, Copy, ImageDown } from "lucide-react";
+import { ThemeSelect } from "./ThemeSelect";
 import styles from "./ExportToolbar.module.css";
 
 interface ExportAction {
@@ -15,6 +16,10 @@ interface ExportToolbarProps {
   onExportPng: () => void;
   onCopySvg: () => void;
   onCopyPng: () => void;
+  themes: string[];
+  selectedTheme: string;
+  onThemeChange: (theme: string) => void;
+  themesLoading?: boolean;
 }
 
 export function ExportToolbar({
@@ -23,6 +28,10 @@ export function ExportToolbar({
   onExportPng,
   onCopySvg,
   onCopyPng,
+  themes,
+  selectedTheme,
+  onThemeChange,
+  themesLoading = false,
 }: ExportToolbarProps) {
   const actions = useMemo<ExportAction[]>(
     () => [
@@ -69,6 +78,12 @@ export function ExportToolbar({
           <span>{label}</span>
         </button>
       ))}
+      <ThemeSelect
+        themes={themes}
+        selectedTheme={selectedTheme}
+        onThemeChange={onThemeChange}
+        loading={themesLoading}
+      />
     </div>
   );
 }

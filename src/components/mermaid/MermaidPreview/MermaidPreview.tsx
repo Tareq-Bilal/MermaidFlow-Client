@@ -1,7 +1,9 @@
 "use client";
 
+import { useState } from "react";
 import { useMermaidRender } from "@/lib/hooks/useMermaidRender";
 import { useMermaidExport } from "@/lib/hooks/useMermaidExport";
+import { useThemes } from "@/lib/hooks/useThemes";
 import { PreviewHeader } from "./components/PreviewHeader/PreviewHeader";
 import { ExportToolbar } from "./components/ExportToolbar/ExportToolbar";
 import { DiagramCanvas } from "./components/DiagramCanvas/DiagramCanvas";
@@ -12,9 +14,12 @@ interface MermaidPreviewProps {
 }
 
 export function MermaidPreview({ code }: MermaidPreviewProps) {
-  const { svg, error } = useMermaidRender(code);
+  const { themes, loading: themesLoading } = useThemes();
+  const [selectedTheme, setSelectedTheme] = useState("dark");
+
+  const { svg, error } = useMermaidRender(code, selectedTheme);
   const { handleExportSvg, handleExportPng, handleCopySvg, handleCopyPng } =
-    useMermaidExport(code, svg);
+    useMermaidExport(code, svg, selectedTheme);
 
   return (
     <div className={styles.panel}>
@@ -25,6 +30,10 @@ export function MermaidPreview({ code }: MermaidPreviewProps) {
         onExportPng={handleExportPng}
         onCopySvg={handleCopySvg}
         onCopyPng={handleCopyPng}
+        themes={themes}
+        selectedTheme={selectedTheme}
+        onThemeChange={setSelectedTheme}
+        themesLoading={themesLoading}
       />
       <DiagramCanvas svg={svg} invalid={Boolean(error)} />
     </div>

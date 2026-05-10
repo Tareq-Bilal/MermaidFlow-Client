@@ -80,11 +80,12 @@ export interface UseMermaidExportResult {
 export function useMermaidExport(
   code: string,
   svg: string,
+  theme = "dark",
 ): UseMermaidExportResult {
   const handleExportSvg = useCallback(async () => {
     try {
       if (getToken()) {
-        await exportViaApi(code, "svg");
+        await exportViaApi(code, "svg", theme);
       } else {
         const url = URL.createObjectURL(
           new Blob([svg], { type: "image/svg+xml" }),
@@ -96,12 +97,12 @@ export function useMermaidExport(
     } catch {
       toast.error("Failed to export SVG");
     }
-  }, [code, svg]);
+  }, [code, svg, theme]);
 
   const handleExportPng = useCallback(async () => {
     try {
       if (getToken()) {
-        await exportViaApi(code, "png");
+        await exportViaApi(code, "png", theme);
       } else {
         const blob = await svgToPngBlob(svg);
         const url = URL.createObjectURL(blob);
@@ -112,7 +113,7 @@ export function useMermaidExport(
     } catch {
       toast.error("Failed to export PNG");
     }
-  }, [code, svg]);
+  }, [code, svg, theme]);
 
   const handleCopySvg = useCallback(async () => {
     try {
