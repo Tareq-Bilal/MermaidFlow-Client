@@ -14,12 +14,15 @@ export interface UseMermaidRenderResult {
   error: string | null;
 }
 
-export function useMermaidRender(code: string): UseMermaidRenderResult {
+export function useMermaidRender(
+  code: string,
+  theme = "dark",
+): UseMermaidRenderResult {
   const [state, setState] = useState<RenderState>(EMPTY);
   const seq = useRef(0);
 
   useEffect(() => {
-    initMermaid(); // idempotent — no-op after first call
+    initMermaid(theme);
 
     if (!code.trim()) {
       setState(EMPTY);
@@ -31,7 +34,7 @@ export function useMermaidRender(code: string): UseMermaidRenderResult {
 
       if (getToken()) {
         try {
-          const svg = await renderViaApi(code);
+          const svg = await renderViaApi(code, theme);
           if (n === seq.current) setState({ svg, error: null });
         } catch {
           if (n === seq.current)
@@ -49,7 +52,7 @@ export function useMermaidRender(code: string): UseMermaidRenderResult {
     }, RENDER_DEBOUNCE_MS);
 
     return () => clearTimeout(id);
-  }, [code]);
+  }, [code, theme]);
 
   return state;
 }

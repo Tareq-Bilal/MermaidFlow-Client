@@ -6,14 +6,17 @@ function buildAuthHeaders(): Record<string, string> {
   return token ? { Authorization: `Bearer ${token}` } : {};
 }
 
-export async function renderViaApi(code: string): Promise<string> {
+export async function renderViaApi(
+  code: string,
+  theme = "dark",
+): Promise<string> {
   const res = await fetch(`${BASE_URL}/mermaid/render`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
       ...buildAuthHeaders(),
     },
-    body: JSON.stringify({ code, theme: "dark" }),
+    body: JSON.stringify({ code, theme }),
   });
   if (!res.ok) throw new Error("Render failed");
   return res.text();
@@ -22,6 +25,7 @@ export async function renderViaApi(code: string): Promise<string> {
 export async function exportViaApi(
   code: string,
   format: "svg" | "png",
+  theme = "dark",
 ): Promise<void> {
   const res = await fetch(`${BASE_URL}/mermaid/export`, {
     method: "POST",
@@ -29,7 +33,7 @@ export async function exportViaApi(
       "Content-Type": "application/json",
       ...buildAuthHeaders(),
     },
-    body: JSON.stringify({ code, theme: "dark", format }),
+    body: JSON.stringify({ code, theme, format }),
   });
   if (!res.ok) throw new Error("Export failed");
   const blob = await res.blob();

@@ -1,15 +1,16 @@
 import mermaid from "mermaid";
 
-let mermaidReady = false;
+let initializedTheme: string | null = null;
 
-export function initMermaid(): void {
-  if (mermaidReady) return;
+export function initMermaid(theme = "dark"): void {
+  if (initializedTheme === theme) return;
   mermaid.initialize({
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    theme: theme as any,
     startOnLoad: false,
-    theme: "dark",
-    darkMode: true,
+    darkMode: theme === "dark" || theme.toLowerCase().includes("dark"),
     fontFamily: "Inter, system-ui, sans-serif",
     flowchart: { curve: "basis" },
   });
-  mermaidReady = true;
+  initializedTheme = theme;
 }
