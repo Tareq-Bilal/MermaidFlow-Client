@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import styles from "./Nav.module.css";
 import { MobileMenu } from "./MobileMenu";
+import { SignInButton, SignUpButton, Show, UserButton } from "@clerk/nextjs";
 
 export type NavVariant = "default";
 
@@ -66,12 +67,17 @@ export function Nav({ links = [], logo = { text: "Mermaid Flow" } }: NavProps) {
       </div>
 
       <div className={styles.navRight}>
-        <Link href="/login" className={styles.navLink}>
-          Sign In
-        </Link>
-        <Link href="/register" className={styles.cta}>
-          Sign Up
-        </Link>
+        <Show when="signed-out">
+          <SignInButton>
+            <button className={styles.navLink}>Sign In</button>
+          </SignInButton>
+          <SignUpButton>
+            <button className={styles.cta}>Sign Up</button>
+          </SignUpButton>
+        </Show>
+        <Show when="signed-in">
+          <UserButton />
+        </Show>
       </div>
 
       <button
