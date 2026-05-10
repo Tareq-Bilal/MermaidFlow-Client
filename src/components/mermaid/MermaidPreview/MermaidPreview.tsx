@@ -19,7 +19,7 @@ export function MermaidPreview({ code }: MermaidPreviewProps) {
 
   const { svg, error } = useMermaidRender(code, selectedTheme);
   const { handleExportSvg, handleExportPng, handleCopySvg, handleCopyPng } =
-    useMermaidExport(code, svg, selectedTheme);
+    useMermaidExport(svg);
 
   return (
     <div className={styles.panel}>

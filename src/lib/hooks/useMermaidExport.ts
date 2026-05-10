@@ -1,7 +1,5 @@
 import { useCallback } from "react";
 import { toast } from "sonner";
-import { getToken } from "@/lib/auth";
-import { exportViaApi } from "@/components/mermaid/MermaidPreview/lib/mermaidApi";
 
 // ─── Utilities ───────────────────────────────────────────────────────────────
 
@@ -77,43 +75,31 @@ export interface UseMermaidExportResult {
   handleCopyPng: () => Promise<void>;
 }
 
-export function useMermaidExport(
-  code: string,
-  svg: string,
-  theme = "dark",
-): UseMermaidExportResult {
+export function useMermaidExport(svg: string): UseMermaidExportResult {
   const handleExportSvg = useCallback(async () => {
     try {
-      if (getToken()) {
-        await exportViaApi(code, "svg", theme);
-      } else {
-        const url = URL.createObjectURL(
-          new Blob([svg], { type: "image/svg+xml" }),
-        );
-        triggerDownload(url, "diagram.svg");
-        URL.revokeObjectURL(url);
-      }
+      const url = URL.createObjectURL(
+        new Blob([svg], { type: "image/svg+xml" }),
+      );
+      triggerDownload(url, "diagram.svg");
+      URL.revokeObjectURL(url);
       toast.success("SVG exported");
     } catch {
       toast.error("Failed to export SVG");
     }
-  }, [code, svg, theme]);
+  }, [svg]);
 
   const handleExportPng = useCallback(async () => {
     try {
-      if (getToken()) {
-        await exportViaApi(code, "png", theme);
-      } else {
-        const blob = await svgToPngBlob(svg);
-        const url = URL.createObjectURL(blob);
-        triggerDownload(url, "diagram.png");
-        URL.revokeObjectURL(url);
-      }
+      const blob = await svgToPngBlob(svg);
+      const url = URL.createObjectURL(blob);
+      triggerDownload(url, "diagram.png");
+      URL.revokeObjectURL(url);
       toast.success("PNG exported");
     } catch {
       toast.error("Failed to export PNG");
     }
-  }, [code, svg, theme]);
+  }, [svg]);
 
   const handleCopySvg = useCallback(async () => {
     try {
