@@ -5,15 +5,23 @@ import { saveTokens, getToken, getRefreshToken } from "@/lib/auth";
 
 const BASE_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:5209";
 
-async function _fetch<T>(path: string, options: RequestInit = {}): Promise<T> {
-  const token = getToken();
+export interface ApiFetchOptions extends RequestInit {
+  authToken?: string | null;
+}
+
+async function _fetch<T>(
+  path: string,
+  options: ApiFetchOptions = {},
+): Promise<T> {
+  const { authToken, ...fetchOptions } = options;
+  const token = authToken ?? getToken();
 
   const res = await fetch(`${BASE_URL}${path}`, {
-    ...options,
+    ...fetchOptions,
     headers: {
       "Content-Type": "application/json",
       ...(token ? { Authorization: `Bearer ${token}` } : {}),
-      ...options.headers,
+      ...fetchOptions.headers,
     },
   });
 
@@ -41,13 +49,13 @@ async function refreshAccessToken(): Promise<string> {
 
 export async function apiFetch<T>(
   path: string,
-  options: RequestInit = {},
+  options: ApiFetchOptions = {},
 ): Promise<T> {
   try {
     return await _fetch<T>(path, options);
   } catch (err: unknown) {
     const apiErr = err as { status?: number };
-    if (apiErr.status === 401) {
+    if (apiErr.status === 401 && !options.authToken) {
       await refreshAccessToken();
       return _fetch<T>(path, options);
     }
