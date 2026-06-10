@@ -6,6 +6,7 @@ import Image from "next/image";
 import styles from "./Nav.module.css";
 import { MobileMenu } from "./MobileMenu";
 import { SignInButton, SignUpButton, Show, UserButton } from "@clerk/nextjs";
+import { ThemeToggle } from "./ThemeToggle";
 
 export type NavVariant = "default";
 
@@ -67,6 +68,7 @@ export function Nav({ links = [], logo = { text: "Mermaid Flow" } }: NavProps) {
       </div>
 
       <div className={styles.navRight}>
+        <ThemeToggle />
         <Show when="signed-out">
           <SignInButton>
             <button className={styles.navLink}>Sign In</button>
