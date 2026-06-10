@@ -272,3 +272,105 @@
   --nav-cta-padding-x: var(--spacing-20);
   --nav-cta-padding-y: var(--spacing-8);
 }
+
+.light {
+  /* Color - Primary */
+  --color-bg-primary: #f7f8fb;
+  --color-text-primary: #101114;
+  --color-accent-primary: #e5484d;
+
+  /* Color - Secondary & Accent */
+  --color-accent-blue: #0969da;
+  --color-accent-green: #2f9e64;
+  --color-accent-yellow: #b7791f;
+  --color-blue-transparent: rgba(9, 105, 218, 0.14);
+  --color-red-transparent: rgba(229, 72, 77, 0.12);
+
+  /* Color - Surface & Background */
+  --color-surface-100: #ffffff;
+  --color-surface-card: #f1f3f5;
+  --color-surface-button: #ffffff;
+  --color-key-start: #f3f4f6;
+  --color-key-end: #e8eaee;
+
+  /* Color - Neutrals & Text */
+  --color-text-near-white: #101114;
+  --color-text-light-gray: #2f3337;
+  --color-text-silver: #4b5158;
+  --color-text-medium-gray: #667085;
+  --color-text-dim-gray: #8a919b;
+  --color-text-dark-gray: #a6acb5;
+
+  /* Color - Borders */
+  --color-border: #d9dde3;
+  --color-border-dark: #c8ced8;
+  --color-border-subtle: rgba(16, 17, 20, 0.08);
+  --color-border-medium: rgba(16, 17, 20, 0.12);
+  --color-border-high: rgba(16, 17, 20, 0.18);
+
+  /* Color - Semantic */
+  --color-error: #e5484d;
+  --color-success: #2f9e64;
+  --color-warning: #b7791f;
+  --color-info: #0969da;
+
+  /* Shadows - Elevation Levels */
+  --shadow-subtle: rgba(16, 17, 20, 0.08) 0px 1.189px 2.377px;
+  --shadow-ring:
+    rgba(16, 17, 20, 0.1) 0px 0px 0px 1px,
+    rgba(255, 255, 255, 0.9) 0px 1px 0px 0px inset;
+  --shadow-button:
+    rgba(255, 255, 255, 0.9) 0px 1px 0px 0px inset,
+    rgba(16, 17, 20, 0.16) 0px 0px 0px 1px,
+    rgba(16, 17, 20, 0.08) 0px -1px 0px 0px inset;
+  --shadow-key:
+    rgba(16, 17, 20, 0.1) 0px 1.5px 0.5px 2.5px,
+    rgba(16, 17, 20, 0.08) 0px 1px 0px 1px,
+    rgba(255, 255, 255, 0.9) 0px 1px 0px 0px inset;
+  --shadow-floating:
+    rgba(16, 17, 20, 0.1) 0px 0px 0px 2px,
+    rgba(16, 17, 20, 0.12) 0px 12px 28px;
+
+  /* Shadows - Decorative */
+  --shadow-warm-glow: rgba(229, 72, 77, 0.08) 0px 0px 20px 5px;
+  --shadow-blue-glow: rgba(9, 105, 218, 0.15) 0px 0px 14px;
+  --shadow-red-glow: rgba(229, 72, 77, 0.15) 0px 0px 14px;
+  --shadow-button-hover: rgba(16, 17, 20, 0.08) 0px 7px 18px;
+
+  /* Gradients */
+  --gradient-key: linear-gradient(180deg, #f3f4f6 0%, #e8eaee 100%);
+  --gradient-warm-glow: radial-gradient(
+    circle,
+    rgba(229, 72, 77, 0.08) 0%,
+    transparent 70%
+  );
+
+  /* Component - Text Colors */
+  --text-color-primary: var(--color-text-primary);
+  --text-color-secondary: var(--color-text-light-gray);
+  --text-color-muted: var(--color-text-medium-gray);
+  --text-color-accent: var(--color-accent-primary);
+
+  /* Component - Button Variants */
+  --button-primary-color: var(--color-text-primary);
+  --button-primary-shadow: rgba(16, 17, 20, 0.1) 0px 1px 0px 0px inset;
+  --button-secondary-color: var(--color-text-primary);
+  --button-secondary-border: var(--color-border-high);
+  --button-ghost-color: var(--color-text-medium-gray);
+  --button-ghost-shadow: rgba(16, 17, 20, 0.08) 0px 1px 0px 0px inset;
+  --button-ghost-hover-color: var(--color-text-primary);
+  --button-cta-bg: #101114;
+  --button-cta-color: #ffffff;
+  --button-cta-hover-bg: #000000;
+
+  /* Component - Card Variants */
+  --card-bg: var(--color-surface-100);
+  --card-border: var(--color-border-subtle);
+  --card-hover-border: var(--color-border-high);
+
+  /* Component - Nav */
+  --nav-bg: var(--color-bg-primary);
+  --nav-border: var(--color-border-subtle);
+  --nav-link-color: var(--color-text-medium-gray);
+  --nav-link-hover-color: var(--color-text-primary);
+}
