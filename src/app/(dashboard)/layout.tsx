@@ -3,6 +3,7 @@
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { useAuth } from "@clerk/nextjs";
 import {
   getToken,
   clearTokens,
@@ -17,12 +18,15 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }) {
   const router = useRouter();
+  const { isLoaded, isSignedIn } = useAuth();
 
   useEffect(() => {
-    if (!getToken()) {
+    if (!isLoaded) return;
+
+    if (!isSignedIn && !getToken()) {
       router.replace("/login");
     }
-  }, [router]);
+  }, [isLoaded, isSignedIn, router]);
 
   async function handleLogout() {
     try {

@@ -7,6 +7,7 @@ export default function Home() {
   const navLinks = [
     { href: "#features", label: "Features" },
     { href: "#editor", label: "Editor" },
+    { href: "/documents", label: "My Documents" },
   ];
 
   return (
